@@ -52,11 +52,6 @@ nav > ul > li {
 	padding: 10px
 }
 
-.detail {
-  display: none;
-  padding: 10px;
-}
-
 @media all and (max-width: 600px) {
 	header {
 		margin: 10px;
@@ -158,17 +153,24 @@ main {
   border-color: #9361bf;
 }
 
-.delete{
+.btn {
   float: right;
   background: #9361bf;
+  margin-right: 10px;
   padding: 6px;
   border-radius: 4px;
   cursor: pointer;
   color: white;
+  display: none;
 }
 
-.delete:hover{
+.edit:hover, .delete:hover{
   background: #333;
+}
+
+.detail {
+  display: none;
+  padding: 10px;
 }
 
 #add-blog{
