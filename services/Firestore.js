@@ -25,7 +25,7 @@ export const getBlogs = async () => {
 }
 
 export const createBlog = (name, body) => db.collection('blogs').add({ title: name, body: body})
-/* export const createBlog = (blog) => db.collection('blogs').set(Object.assign({}, blog))
- */
+
 export const deleteBlog = (blogId) => db.collection('blogs').doc(blogId).delete()
 
+export const editBlog = (blogId, name, body) => db.collection('blogs').doc(blogId).set({ title: name, body: body})

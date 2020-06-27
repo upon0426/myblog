@@ -176,13 +176,18 @@ main {
 .add-wrapper {
   margin: 20px 0;
 }
+
+.edit-wrapper {
+  margin: 10px 0;
+  display: none;;
+}
  
 #add-blog{
   width: 500px;
   margin: 0 auto;
 }
 
-#add-blog input{
+#add-blog input, #edit-blog input {
   display: block;
   padding: 10px;
   border: 1px solid #ccc;
@@ -192,13 +197,13 @@ main {
   width: 300px;
 }
 
-#add-blog button{
+#add-blog button {
   border: 1px solid #9361bf;
   background: #9361bf;
   padding: 10px 20px;
   font-size: 16px;
   display: inline-block;
-  margin: 0;
+  margin: 0 10px;
   border-radius: 4px;
   cursor: pointer;
   width: 100px;
@@ -218,6 +223,34 @@ main {
 
 #add-blog label{
   line-height: 52px;
+}
+
+#cancel {
+  border: 1px solid #9361bf;
+  background: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  display: inline-block;
+  margin-right: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100px;
+  border-left: 2;
+  color: #9361bf;
+}
+
+#save {
+  border: 1px solid #9361bf;
+  background: #9361bf;
+  padding: 10px 20px;
+  font-size: 16px;
+  display: inline-block;
+  margin-right: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100px;
+  border-left: 0;
+  color: white;
 }
 
 #tabbed-content li{
