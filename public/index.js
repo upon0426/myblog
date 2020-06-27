@@ -1,11 +1,12 @@
-import { getBlogs, createBlog, deleteBlog } from '../services/Firestore';
+import { getBlogs, createBlog, deleteBlog, editBlog } from '../services/Firestore';
 import './index.css';
 
 class BlogList {
     constructor() {
         this.list = document.querySelector('#blog-list ul');
         this.form = document.forms['add-blog'];
-        this.addInput = document.querySelector('#add-input');
+        this.addName = document.querySelector('#add-name');
+        this.addBody = document.querySelector('#add-body');
         this.hideBox = document.querySelector('#hide');
         this.searchBar = document.forms['search-blogs'].querySelector('input');
         this.bindEvents();
@@ -13,39 +14,76 @@ class BlogList {
     }
 
     bindEvents() {
-        this.list.addEventListener('click', this.onDeleteButtonClick.bind(this));
         this.list.addEventListener('click', this.onNameClick.bind(this));
+        this.list.addEventListener('click', this.onDeleteButtonClick.bind(this));
+        this.list.addEventListener('click', this.onEditButtonClick.bind(this));
+        this.list.addEventListener('click', this.onSave.bind(this));
+        this.list.addEventListener('click', this.onCancel.bind(this));
         this.form.addEventListener('submit', this.onSubmit.bind(this));
         this.hideBox.addEventListener('change', this.onHideBoxChange.bind(this));
         this.searchBar.addEventListener('keyup', this.onSearchBarChange.bind(this));
     }
     
-    async onNameClick(e) {
+    async onNameClick(e) {;
       if (e.target.className == 'name') {
-        if (e.target.parentNode.lastElementChild.style.display == 'none') {
-          e.target.parentNode.lastElementChild.style.display = 'block';
+        if (e.target.parentNode.children[1].style.display == 'none') {
+          e.target.parentNode.children[1].style.display = 'block';
+          e.target.parentNode.children[2].style.display = 'block';
+          e.target.parentNode.children[3].style.display = 'block';
         } else {
-          e.target.parentNode.lastElementChild.style.display = 'none';
+          e.target.parentNode.children[1].style.display = 'none';
+          e.target.parentNode.children[2].style.display = 'none';
+          e.target.parentNode.children[3].style.display = 'none';
         }
-      console.log('aaaa');
       }
     }
   
 
     async onDeleteButtonClick(e) {
-      if (e.target.className == 'delete') {
+      if (e.target.className == 'btn delete') {
       const blogId = e.target.dataset.id;
       await deleteBlog(blogId);
       this.render();
       }
     }
 
+    onEditButtonClick(e) {
+      if (e.target.className == 'btn edit') {
+      e.target.parentNode.children[1].style.display = 'none';
+      e.target.parentNode.children[2].style.display = 'none';
+      e.target.parentNode.children[4].children[0].style.display = 'block';
+      }
+    }
+
+    
+    async onSave(e) {
+      e.preventDefault();      
+      if (e.target.id == 'save') {
+        const blogId = e.target.dataset.id;
+        const name = this.editName.value;
+        const body = this.editBody.value
+        await editBlog(blogId, name, body);
+        this.editName.value = '';
+        this.editBody.value = '';
+        this.render();
+      }
+    }
+
+    async onCancel(e) {
+      e.preventDefault();
+      if (e.target.id == 'cancel') {
+        e.target.parentNode.style.display = 'none';
+        e.target.parentNode.parentNode.parentNode.children[3].style.display = 'none';
+      }
+    }
     
   async onSubmit(e) {
     e.preventDefault();
-    const { value } = this.addInput;
-    await createBlog(value);
-    this.addInput.value = '';
+    const name = this.addName.value;
+    const body = this.addBody.value;
+    await createBlog(name, body);
+    this.addName.value = '';
+    this.addBody.value = '';
     this.render();
   }
 
@@ -73,8 +111,10 @@ class BlogList {
   async render() {
     const blogs = await getBlogs();
     let lis = '';
-    blogs.forEach((blog) => lis += `<li><span class="name"><i class="fa fa-chevron-right fa-fw"></i>${blog.title}</span><span class="delete" data-id=${blog.id}>delete</span><p class="detail">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p></li>`);
+    blogs.forEach((blog) => lis += `<li><span class="name"><i class="fa fa-chevron-right fa-fw"></i>${blog.title}</span><span class="btn delete" data-id=${blog.id}>delete</span><span class="btn edit">edit</span><p class="detail">${blog.body}</p><form id="edit-blog"><div class="edit-wrapper"><input type="text" id="edit-name" placeholder="${blog.title}"><input type="text" id="edit-body" placeholder="${blog.body}"><button id="cancel">cancel</button><button id="save" data-id=${blog.id}>Save</button></div></form></li>`);
     this.list.innerHTML = lis;
+    this.editName = document.querySelector("#edit-name");
+    this.editBody = document.querySelector("#edit-body");
   }
 }
 
