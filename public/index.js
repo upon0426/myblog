@@ -5,7 +5,8 @@ class BlogList {
     constructor() {
         this.list = document.querySelector('#blog-list ul');
         this.form = document.forms['add-blog'];
-        this.addInput = document.querySelector('#add-input');
+        this.addName = document.querySelector('#add-name');
+        this.addBody = document.querySelector('#add-body');
         this.hideBox = document.querySelector('#hide');
         this.searchBar = document.forms['search-blogs'].querySelector('input');
         this.bindEvents();
@@ -46,9 +47,11 @@ class BlogList {
     
   async onSubmit(e) {
     e.preventDefault();
-    const { value } = this.addInput;
-    await createBlog(value);
-    this.addInput.value = '';
+    const name = this.addName.value;
+    const body = this.addBody.value;
+    await createBlog(name, body);
+    this.addName.value = '';
+    this.addBody.value = '';
     this.render();
   }
 
@@ -76,7 +79,7 @@ class BlogList {
   async render() {
     const blogs = await getBlogs();
     let lis = '';
-    blogs.forEach((blog) => lis += `<li><span class="name"><i class="fa fa-chevron-right fa-fw"></i>${blog.title}</span><span class="btn delete" data-id=${blog.id}>delete</span><span class="btn edit">edit</span><p class="detail">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p></li>`);
+    blogs.forEach((blog) => lis += `<li><span class="name"><i class="fa fa-chevron-right fa-fw"></i>${blog.title}</span><span class="btn delete" data-id=${blog.id}>delete</span><span class="btn edit">edit</span><p class="detail">${blog.body}</p></li>`);
     this.list.innerHTML = lis;
   }
 }
