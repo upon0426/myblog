@@ -52,6 +52,11 @@ nav > ul > li {
 	padding: 10px
 }
 
+.detail {
+  display: none;
+  padding: 10px;
+}
+
 @media all and (max-width: 600px) {
 	header {
 		margin: 10px;
