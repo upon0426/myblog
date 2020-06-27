@@ -5,7 +5,7 @@ const path = require('path');
 const dotenv = require('dotenv').config();
 module.exports = {
   entry: {
-    entry: path.resolve(__dirname, "./public/index.js"),
+    index: './public/index.js'
   },
   output: {
     filename: '[name].bundle.js',

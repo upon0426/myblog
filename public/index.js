@@ -1,4 +1,4 @@
-import { getBlogs, createBlog, deleteBlog } from '../services/FireStore';
+import { getBlogs, createBlog, deleteBlog } from '../services/Firestore';
 import './index.css';
 
 class BlogList {
