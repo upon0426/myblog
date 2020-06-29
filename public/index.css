@@ -1,15 +1,16 @@
 /* css selectors guide: https://www.w3schools.com/cssref/css_selectors.asp */
 
-@import url("https://fonts.googleapis.com/css?family=Cardo:400i|Rubik:400,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&family=Source+Serif+Pro&display=swap');
 :root {
   /* Colors */
   --color-black: black;
-  --color-pastel-green: #86E88F;
+  --color-orange: orange;
   
   --d: 700ms;
   --e: cubic-bezier(0.19, 1, 0.22, 1);
-  --font-sans: 'Rubik', sans-serif;
-  --font-serif: 'Cardo', serif;
+  --font-sans: 'Source Sans Pro', sans-serif;
+  --font-serif: 'Cochin', 'YuGothic', 'Yu Gothic', serif;
 }
 
 * {
@@ -26,20 +27,23 @@ a {
   text-transform: uppercase;
 }
 
-a:hover, .current {
-	color: var(--color-pastel-green);
+a:hover {
+	color: var(--color-orange);
 }
 
 header {
   background-color: rgb(255, 255, 255);
+  top: 0px;
+  height: 85px;
+  width: 100%;
+  position: fixed;
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
-  position: relative;
   z-index: 3;
   padding: 10px;
 }
 
 nav {
-  padding: 10px;
+  padding: 8px;
   float: right;
 }
 
@@ -91,50 +95,24 @@ main {
   min-height: 100vh
 }
 
-/* DOM Section */
-.section-dom {
-  padding-top: 3rem;
-  text-align: center;
-  margin: 0 auto;
+#BLOG {
+
+  padding: 0 0 30px;
 }
 
-#wrapper{
-  width: 90%;
-  max-width: 960px;
-  margin: 40px auto;
-  border-radius: 6px;
-  box-shadow: 0px 1px 6px rgba(0,0,0,0.2);
-  box-sizing: border-box;
-  padding: 0 0 20px;
-  overflow: hidden;
-  border: 1px solid lightgray;
-}
-
-#page-banner{
-  background: #eee ;
+.page-banner{
+  background: #FFE5CC;
   padding: 10px 0;
 
 }
 
-#page-banner h1, #page-banner p{
+.page-banner h1, .page-banner p{
   width: 100%;
   text-align: center;
   margin: 10px 0;
 }
 
-#page-banner input{
-  width: 90%;
-  max-width: 300px;
-  margin: 20px auto;
-  display: block;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-  color: #444;
-}
-
-#blog-list, #add-blog, #tabbed-content{
+#blog-list, #add-blog {
   margin: 30px;
 }
 
@@ -143,19 +121,40 @@ main {
   padding: 0;
 }
 
-#blog-list li{
+#blog-list input{
+  width: 90%;
+  max-width: 300px;
+  margin: 20px auto;
+  display: inline-block;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #444;
+}
+
+#CAREER li, #SKILL li, #WORKS li, #blog-list li{
   padding: 20px;
   border-left: 5px solid #ddd;
   margin: 20px 10px;
 }
 
-#blog-list li:hover{
-  border-color: #9361bf;
+#CAREER li:hover, #SKILL li:hover, #WORKS li:hover, #blog-list li:hover{
+  border-color: orange;
+}
+
+.wrapper {
+  width: 90%;
+  max-width: 960px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px 5px orange, 0 0 5px 3px orange;
+  margin: 100px auto;
+  overflow: hidden;
 }
 
 .btn {
   float: right;
-  background: #9361bf;
+  background: orange;
   margin-right: 10px;
   padding: 6px;
   border-radius: 4px;
@@ -181,29 +180,26 @@ main {
   margin: 10px 0;
   display: none;;
 }
- 
-#add-blog{
-  width: 500px;
-  margin: 0 auto;
-}
 
-#add-blog input, #edit-blog input {
+#add-blog input, #add-blog textarea, #edit-blog input, #edit-blog textarea {
   display: block;
   padding: 10px;
   border: 1px solid #ccc;
   font-size: 16px;
-  border-radius: 4px 0 0 4px;
+  border-radius: 4px;
   box-sizing: border-box;
   width: 300px;
 }
+textarea::-webkit-input-placeholder {
+  color: #ccc;
+}
 
 #add-blog button {
-  border: 1px solid #9361bf;
-  background: #9361bf;
+  border: 1px solid orange;
+  background: orange;
   padding: 10px 20px;
   font-size: 16px;
   display: inline-block;
-  margin: 0 10px;
   border-radius: 4px;
   cursor: pointer;
   width: 100px;
@@ -226,22 +222,22 @@ main {
 }
 
 #cancel {
-  border: 1px solid #9361bf;
+  border: 1px solid orange;
   background: white;
   padding: 10px 20px;
   font-size: 16px;
-  display: inline-block;
+  display: inline;
   margin-right: 10px;
   border-radius: 4px;
   cursor: pointer;
   width: 100px;
   border-left: 2;
-  color: #9361bf;
+  color: orange;
 }
 
 #save {
-  border: 1px solid #9361bf;
-  background: #9361bf;
+  border: 1px solid orange;
+  background: orange;
   padding: 10px 20px;
   font-size: 16px;
   display: inline-block;
@@ -252,22 +248,3 @@ main {
   border-left: 0;
   color: white;
 }
-
-#tabbed-content li{
-  display: inline-block;
-  padding: 10px 14px;
-  background: #ddd;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
-}
-#tabbed-content .tab{
-  display: none;
-  border: 1px solid #ddd;
-  padding: 0 10px;
-  border-radius: 4px;
-}
-#tabbed-content .tab.active{
-  display: block;
-}
-
